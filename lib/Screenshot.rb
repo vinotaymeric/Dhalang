@@ -7,22 +7,16 @@ module Dhalang
     SCREENSHOT_GENERATOR_JS_PATH = File.expand_path('../js/screenshotgenerator.js', __FILE__)
 
     def self.get_from_url_as_jpeg(url)
-      validate_url(url)
+      DhalangHelper::validate_url(url)
       get_image(url, :jpeg)
     end
 
     def self.get_from_url_as_png(url)
-      validate_url(url)
+      DhalangHelper::validate_url(url)
       get_image(url, :png)
     end
 
     private
-    def self.validate_url(url)
-      if (url !~ URI::DEFAULT_PARSER.regexp[:ABS_URI])
-        raise URI::InvalidURIError, 'The given url was invalid, use format http://www.example.com'
-      end
-    end
-
     def self.create_temporary_screenshot_file
       Tempfile.new("png")
     end

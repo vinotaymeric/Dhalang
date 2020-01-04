@@ -7,7 +7,7 @@ module Dhalang
     PDF_GENERATOR_JS_PATH = File.expand_path('../js/pdfgenerator.js', __FILE__)
 
     def self.get_from_url(url)
-      validate_url(url)
+      DhalangHelper::validate_url(url)
       temporary_pdf_save_file = create_temporary_pdf_file
       begin
         visit_page_with_puppeteer(url, temporary_pdf_save_file.path)
@@ -35,12 +35,6 @@ module Dhalang
     end
 
     private
-    def self.validate_url(url)
-      if (url !~ URI::DEFAULT_PARSER.regexp[:ABS_URI])
-        raise URI::InvalidURIError, 'The given url was invalid, use format http://www.example.com'
-      end
-    end
-
     def self.create_temporary_pdf_file
       Tempfile.new("pdf")
     end
