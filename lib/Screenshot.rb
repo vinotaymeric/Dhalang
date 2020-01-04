@@ -18,17 +18,17 @@ module Dhalang
 
     private
     def self.create_temporary_screenshot_file
+      # TODO: change this to non png, it is not related to file format i guess. And if it is than jpeg shouldn't work.
       Tempfile.new("png")
     end
 
     def self.get_image(url, type)
-      temporary_screenshot_save_file = create_temporary_screenshot_file
+      temp_file = create_temporary_screenshot_file
       begin
-        visit_page_with_puppeteer(url, temporary_screenshot_save_file.path, type)
-        binary_image_content = get_file_content_as_binary_string(temporary_screenshot_save_file)
+        visit_page_with_puppeteer(url, temp_file.path, type)
+        binary_image_content = get_file_content_as_binary_string(temp_file)
       ensure
-        temporary_screenshot_save_file.close unless temporary_screenshot_save_file.closed?
-        temporary_screenshot_save_file.unlink
+        DhalangHelper::remove_temp_file(temp_file)
       end
       return binary_image_content
     end

@@ -13,5 +13,14 @@ module Dhalang
                 raise URI::InvalidURIError, 'The given url was invalid, use format http://www.example.com'
             end
         end
+
+        # Closes and then removes the given temp file.
+        #
+        # @params::temp_file - The temp file to remove to validate.
+        #
+        def self.remove_temp_file(temp_file)
+            temp_file.close unless temp_file.closed?
+            temp_file.unlink
+        end
     end
 end

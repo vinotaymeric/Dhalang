@@ -8,37 +8,30 @@ module Dhalang
 
     def self.get_from_url(url)
       DhalangHelper::validate_url(url)
-      temporary_pdf_save_file = create_temporary_pdf_file
+      pdf_temp_file = Tempfile.new("pdf")
       begin
-        visit_page_with_puppeteer(url, temporary_pdf_save_file.path)
-        binary_pdf_content = get_file_content_as_binary_string(temporary_pdf_save_file)
+        visit_page_with_puppeteer(url, pdf_temp_file.path)
+        binary_pdf_content = get_file_content_as_binary_string(pdf_temp_file)
       ensure
-        temporary_pdf_save_file.close unless temporary_pdf_save_file.closed?
-        temporary_pdf_save_file.unlink
+        DhalangHelper::remove_temp_file(pdf_temp_file)
       end
       return binary_pdf_content
     end
 
     def self.get_from_html(html)
-      html_file = create_temporary_html_file(html)
-      temporary_pdf_save_file = create_temporary_pdf_file
+      html_temp_file = create_temporary_html_file(html)
+      pdf_temp_file = Tempfile.new("pdf")
       begin
-        visit_page_with_puppeteer("file://" + html_file.path, temporary_pdf_save_file.path)
-        binary_pdf_content = get_file_content_as_binary_string(temporary_pdf_save_file)
+        visit_page_with_puppeteer("file://" + html_temp_file.path, pdf_temp_file.path)
+        binary_pdf_content = get_file_content_as_binary_string(pdf_temp_file)
       ensure
-        temporary_pdf_save_file.close unless temporary_pdf_save_file.closed?
-        html_file.close unless html_file.closed?
-        temporary_pdf_save_file.unlink
-        html_file.unlink
+        DhalangHelper::remove_temp_file(pdf_temp_file)
+        DhalangHelper::remove_temp_file(html_temp_file)
       end
       return binary_pdf_content
     end
 
     private
-    def self.create_temporary_pdf_file
-      Tempfile.new("pdf")
-    end
-
     ## Creates a temp .html file which can be browsed to by puppeteer for creating a pdf
     def self.create_temporary_html_file(content)
       html_file = Tempfile.new(['page', '.html'])
