@@ -5,7 +5,6 @@ require 'tempfile'
 module Dhalang
   class Screenshot
     SCREENSHOT_GENERATOR_JS_PATH = File.expand_path('../js/screenshotgenerator.js', __FILE__)
-    PROJECT_PATH = Dir.pwd + '/node_modules/'
 
     def self.get_from_url_as_jpeg(url)
       validate_url(url)
@@ -41,7 +40,7 @@ module Dhalang
     end
 
     def self.visit_page_with_puppeteer(page_to_visit, path_to_save_pdf_to, image_save_type)
-      system("node #{SCREENSHOT_GENERATOR_JS_PATH} #{page_to_visit} #{Shellwords.escape(path_to_save_pdf_to)} #{Shellwords.escape(PROJECT_PATH)} #{Shellwords.escape(image_save_type)}")
+      system("node #{SCREENSHOT_GENERATOR_JS_PATH} #{page_to_visit} #{Shellwords.escape(path_to_save_pdf_to)} #{Shellwords.escape(DhalangHelper::PUPPETEER_DIRECTORY)} #{Shellwords.escape(image_save_type)}")
     end
 
     def self.get_file_content_as_binary_string(file)
