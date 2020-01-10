@@ -11,7 +11,7 @@ module Dhalang
     #
     # @params::url - The url to create the screenshot of, make sure it starts with www. and ends with a .tld.
     #
-    # @returns A string containing the created screenshot in binary
+    # @returns A string containing the created screenshot in binary.
     #
     def self.get_from_url_as_jpeg(url)
       DhalangHelper::validate_url(url)
@@ -22,7 +22,7 @@ module Dhalang
     #
     # @params::url - The url to create the screenshot of, make sure it starts with www. and ends with a .tld.
     #
-    # @returns A string containing the created screenshot in binary
+    # @returns A string containing the created screenshot in binary.
     #
     def self.get_from_url_as_png(url)
       DhalangHelper::validate_url(url)
@@ -34,6 +34,8 @@ module Dhalang
     #
     # @params::url  - The url of the page to visit.
     # @params::image_type - The file type of the image to use.
+    # 
+    # @returns A string containing the created screenshot in binary.
     #
     def self.get_image(url, image_type)
       temp_file = Tempfile.new(image_type.to_s)

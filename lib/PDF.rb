@@ -11,7 +11,7 @@ module Dhalang
     #
     # @params::url - The url to create the PDF of, make sure it starts with www. and ends with a .tld.
     #
-    # @returns A string containing the created PDF in binary
+    # @returns A string containing the created PDF in binary.
     #
     def self.get_from_url(url)
       DhalangHelper::validate_url(url)
@@ -29,7 +29,7 @@ module Dhalang
     #
     # @params::html - The content of the html file to create.
     #
-    # @returns A string containing the created PDF in binary
+    # @returns A string containing the created PDF in binary.
     #
     def self.get_from_html(html)
       html_temp_file = create_temporary_html_file(html)
@@ -48,6 +48,8 @@ module Dhalang
     # Creates a temp .html file which can be browsed to by puppeteer for creating a pdf.
     #
     # @params::content - The content of the html file to create.
+    #
+    # @returns The created TempFile.
     #
     def self.create_temporary_html_file(content)
       html_file = Tempfile.new(['page', '.html'])
