@@ -12,7 +12,7 @@ describe '#get_from_url' do
 
   context 'valid url' do
     it 'should not raise ArgumentError' do
-      expect { Dhalang::PDF.get_from_url("https://www.google.com") }.to_not raise_error(URI::InvalidURIError)
+      expect { Dhalang::PDF.get_from_url("https://www.google.com") }.not_to raise_error
     end
 
     it 'should return an object of type string' do

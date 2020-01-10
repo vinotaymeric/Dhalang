@@ -13,7 +13,7 @@ describe '#get_from_url_as_png' do
 
   context 'valid url' do
     it 'should not raise ArgumentError' do
-      expect { Dhalang::Screenshot.get_from_url_as_png("https://www.google.com") }.to_not raise_error(URI::InvalidURIError)
+      expect { Dhalang::Screenshot.get_from_url_as_png("https://www.google.com") }.not_to raise_error
     end
 
     it 'should return an object of type string' do
@@ -42,7 +42,7 @@ describe '#get_from_url_as_jpeg' do
 
   context 'valid url' do
     it 'should not raise ArgumentError' do
-      expect { Dhalang::Screenshot.get_from_url_as_jpeg("https://www.google.com") }.to_not raise_error(URI::InvalidURIError)
+      expect { Dhalang::Screenshot.get_from_url_as_jpeg("https://www.google.com") }.not_to raise_error
     end
 
     it 'should return an object of type string' do
