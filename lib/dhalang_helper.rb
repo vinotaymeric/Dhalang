@@ -22,5 +22,13 @@ module Dhalang
             temp_file.close unless temp_file.closed?
             temp_file.unlink
         end
+
+        # Reads the given file as a binary string.
+        #
+        # @params::file - The file to read.
+        #
+        def self.read_file_content_as_binary_string(file)
+            IO.binread(file.path)
+        end
     end
 end

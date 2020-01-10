@@ -26,7 +26,7 @@ module Dhalang
       temp_file = create_temporary_screenshot_file
       begin
         visit_page_with_puppeteer(url, temp_file.path, type)
-        binary_image_content = get_file_content_as_binary_string(temp_file)
+        binary_image_content = DhalangHelper::read_file_content_as_binary_string(temp_file)
       ensure
         DhalangHelper::remove_temp_file(temp_file)
       end

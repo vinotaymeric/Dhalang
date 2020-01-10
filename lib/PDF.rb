@@ -11,7 +11,7 @@ module Dhalang
       pdf_temp_file = Tempfile.new("pdf")
       begin
         visit_page_with_puppeteer(url, pdf_temp_file.path)
-        binary_pdf_content = get_file_content_as_binary_string(pdf_temp_file)
+        binary_pdf_content = DhalangHelper::read_file_content_as_binary_string(pdf_temp_file)
       ensure
         DhalangHelper::remove_temp_file(pdf_temp_file)
       end
@@ -23,7 +23,7 @@ module Dhalang
       pdf_temp_file = Tempfile.new("pdf")
       begin
         visit_page_with_puppeteer("file://" + html_temp_file.path, pdf_temp_file.path)
-        binary_pdf_content = get_file_content_as_binary_string(pdf_temp_file)
+        binary_pdf_content = DhalangHelper::read_file_content_as_binary_string(pdf_temp_file)
       ensure
         DhalangHelper::remove_temp_file(pdf_temp_file)
         DhalangHelper::remove_temp_file(html_temp_file)
@@ -42,10 +42,6 @@ module Dhalang
 
     def self.visit_page_with_puppeteer(page_to_visit, path_to_save_pdf_to)
       system("node #{PDF_GENERATOR_JS_PATH} #{page_to_visit} #{Shellwords.escape(path_to_save_pdf_to)} #{Shellwords.escape(DhalangHelper::PUPPETEER_DIRECTORY)}")
-    end
-
-    def self.get_file_content_as_binary_string(file)
-      IO.binread(file.path)
     end
   end
 end
