@@ -3,9 +3,16 @@ require 'uri'
 require 'tempfile'
 
 module Dhalang
+  # Contains a set of methods that can be used for creating PDF's with Puppeteer.
   class PDF
     PDF_GENERATOR_JS_PATH = File.expand_path('../js/pdfgenerator.js', __FILE__)
 
+    # Creates a fullsize PDF from the given url.
+    #
+    # @params::url - The url to create the PDF of, make sure it starts with www. and ends with a .tld.
+    #
+    # @returns A string containing the created PDF in binary
+    #
     def self.get_from_url(url)
       DhalangHelper::validate_url(url)
       pdf_temp_file = Tempfile.new("pdf")
@@ -18,6 +25,12 @@ module Dhalang
       return binary_pdf_content
     end
 
+    # Creates a fullsize PDF from the given html content.
+    #
+    # @params::html - The content of the html file to create.
+    #
+    # @returns A string containing the created PDF in binary
+    #
     def self.get_from_html(html)
       html_temp_file = create_temporary_html_file(html)
       pdf_temp_file = Tempfile.new("pdf")
@@ -32,7 +45,10 @@ module Dhalang
     end
 
     private
-    ## Creates a temp .html file which can be browsed to by puppeteer for creating a pdf
+    # Creates a temp .html file which can be browsed to by puppeteer for creating a pdf.
+    #
+    # @params::content - The content of the html file to create.
+    #
     def self.create_temporary_html_file(content)
       html_file = Tempfile.new(['page', '.html'])
       html_file.write(content)
@@ -40,8 +56,13 @@ module Dhalang
       return html_file
     end
 
-    def self.visit_page_with_puppeteer(page_to_visit, path_to_save_pdf_to)
-      system("node #{PDF_GENERATOR_JS_PATH} #{page_to_visit} #{Shellwords.escape(path_to_save_pdf_to)} #{Shellwords.escape(DhalangHelper::PUPPETEER_DIRECTORY)}")
+    # Performs a page visit with Puppeteer, then creates a PDF based on the page. 
+    #
+    # @params::url            - The url of the page to visit.
+    # @params::temp_pdf_path  - The path of the temp file to write the created pdf to.
+    #
+    def self.visit_page_with_puppeteer(url, temp_pdf_path)
+      system("node #{PDF_GENERATOR_JS_PATH} #{url} #{Shellwords.escape(temp_pdf_path)} #{Shellwords.escape(DhalangHelper::PUPPETEER_DIRECTORY)}")
     end
   end
 end

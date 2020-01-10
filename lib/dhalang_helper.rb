@@ -4,7 +4,7 @@ module Dhalang
  
         # Checks if the given url is valid. A url is valid if it starts with www. and ends with .sometld.
         #
-        # @params::url - The url to validate
+        # @params::url - The url to validate.
         #
         # @throws::InvalidURIError - In case the url was not found valid.
         #
