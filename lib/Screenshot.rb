@@ -9,7 +9,7 @@ module Dhalang
 
     # Creates a fullsize JPEG screenshot from the given url.
     #
-    # @params::url - The url to create the screenshot of, make sure it starts with www. and ends with a .tld.
+    # @params::url - The url to create the screenshot of, make sure it starts with http://www. or https://www. and ends with a .tld.
     #
     # @returns A string containing the created screenshot in binary.
     #
@@ -20,7 +20,7 @@ module Dhalang
 
     # Creates a fullsize PNG screenshot from the given url.
     #
-    # @params::url - The url to create the screenshot of, make sure it starts with www. and ends with a .tld.
+    # @params::url - The url to create the screenshot of, make sure it starts with http://www. or https://www. and ends with a .tld.
     #
     # @returns A string containing the created screenshot in binary.
     #

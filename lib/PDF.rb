@@ -9,7 +9,7 @@ module Dhalang
 
     # Creates a fullsize PDF from the given url.
     #
-    # @params::url - The url to create the PDF of, make sure it starts with www. and ends with a .tld.
+    # @params::url - The url to create the PDF of, make sure it starts with http://www. or https://www. and ends with a .tld.
     #
     # @returns A string containing the created PDF in binary.
     #
