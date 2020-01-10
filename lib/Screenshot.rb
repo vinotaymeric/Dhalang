@@ -14,7 +14,7 @@ module Dhalang
     # @returns A string containing the created screenshot in binary.
     #
     def self.get_from_url_as_jpeg(url)
-      DhalangHelper::validate_url(url)
+      DhalangHelper::ensure_url_is_valid(url)
       get_image(url, :jpeg)
     end
 
@@ -25,7 +25,7 @@ module Dhalang
     # @returns A string containing the created screenshot in binary.
     #
     def self.get_from_url_as_png(url)
-      DhalangHelper::validate_url(url)
+      DhalangHelper::ensure_url_is_valid(url)
       get_image(url, :png)
     end
 

@@ -8,7 +8,7 @@ module Dhalang
         #
         # @throws::InvalidURIError - In case the url was not found valid.
         #
-        def self.validate_url(url)
+        def self.ensure_url_is_valid(url)
             if (url !~ URI::DEFAULT_PARSER.regexp[:ABS_URI])
                 raise URI::InvalidURIError, 'The given url was invalid, use format http://www.example.com'
             end
@@ -26,6 +26,8 @@ module Dhalang
         # Reads the given file as a binary string.
         #
         # @params::file - The file to read.
+        # 
+        # @returns A String representing the binary content of the file.
         #
         def self.read_file_content_as_binary_string(file)
             IO.binread(file.path)

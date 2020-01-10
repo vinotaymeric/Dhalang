@@ -14,7 +14,7 @@ module Dhalang
     # @returns A string containing the created PDF in binary.
     #
     def self.get_from_url(url)
-      DhalangHelper::validate_url(url)
+      DhalangHelper::ensure_url_is_valid(url)
       pdf_temp_file = Tempfile.new("pdf")
       begin
         visit_page_with_puppeteer(url, pdf_temp_file.path)
